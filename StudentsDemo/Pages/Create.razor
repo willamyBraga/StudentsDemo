@@ -1,0 +1,40 @@
+﻿@page "/create"
+@inject NavigationManager navegacao
+@inject StudentsServices servicos
+@inherits OwningComponentBase<StudentsServices>
+
+<div class="container">
+    <div class="card-header">
+        <h1>Cadastro</h1>
+    </div>
+    <div class="card-body">
+        <div>
+            <label>Nome</label>
+            <br />
+            <input type="text" class="input-group" @bind-value="sc.nome" />
+        </div>
+        <div>
+            <label>Email</label>
+            <br />
+            <input type="text" class="input-group" @bind-value="sc.email" />
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="d-flex">
+            <button @onclick="@(() => AddFormulario())">Cadastrar</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    StudentsClasse sc = new StudentsClasse();
+
+    //protected override void OnInitialized()
+    //{
+    //    sc = Service.displaydata(); 
+    //}
+    async Task AddFormulario()
+    {
+        Service.AddStudents(sc);
+    }
+}

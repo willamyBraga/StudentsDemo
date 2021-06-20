@@ -1,0 +1,40 @@
+﻿@page "/details/{id:int}"
+@inject NavigationManager navegacao
+@inherits OwningComponentBase<StudentsServices>
+
+<div class="card">
+    <div class="card-header">
+        <h1>Details Student</h1>
+        <a class="btn btn-success" href="/create">New Students</a>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td>@sc.id</td>
+                  <td>@sc.nome</td>
+                  <td>@sc.email</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    StudentsClasse sc = new StudentsClasse();
+
+    protected override void OnInitialized()
+    {
+        sc = Service.TrazUmDado(id);
+    }
+}

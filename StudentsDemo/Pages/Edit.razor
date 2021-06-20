@@ -1,0 +1,44 @@
+﻿@page "/edit/{id:int}"
+@inject NavigationManager navegacao
+@inject StudentsServices servicos
+@inherits OwningComponentBase<StudentsServices>
+
+    <div class="container">
+        <div class="card-header">
+            <h1>Edição</h1>
+        </div>
+        <div class="card-body">
+            <div>
+                <label>Nome</label>
+                <br />
+                <input type="text" class="input-group" @bind-value="sc.nome" />
+            </div>
+            <div>
+                <label>Email</label>
+                <br />
+                <input type="text" class="input-group" @bind-value="sc.email" />
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex">
+                <button @onclick="@(() => EditFormulario())">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    @code {
+        [Parameter]
+        public int id { get; set; }
+        [Parameter]
+        public StudentsClasse Students { get; set; }
+        StudentsClasse sc = new StudentsClasse();
+
+        protected override void OnInitialized()
+        {
+            sc = Service.TrazUmDado(id);
+        }
+        async Task EditFormulario()
+        {
+            Service.UpdateStudents(sc);
+        }
+    }

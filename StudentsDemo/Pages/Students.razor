@@ -1,0 +1,58 @@
+﻿@page "/demo"
+@using StudentsDemo.Data
+@using StudentsDemo.Services
+@inherits OwningComponentBase<StudentsServices>
+@inject StudentsServices servicos
+
+<div class="card">
+    <div class="card-header">
+        <h1>List Students</h1>
+        <a class="btn btn-success" href="/create">New Students</a>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Ação</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in sc)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.nome</td>
+                        <td>@item.email</td>
+                        <td>
+                            <button><a @onclick="@(() =>Deletar(@item.id))" class="oi oi-trash"></a></button>
+                            <button><a href="/edit/@item.id" class="oi oi-pencil"></a></button>
+                            <button><a href="/details/@item.id" class="oi oi-info"></a></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@code {
+    public System.Collections.Generic.IList<StudentsDemo.Data.StudentsClasse> sc;
+
+    protected override void OnInitialized()
+    {
+        sc = Service.displaydata();
+    }
+
+    void Deletar(int id)
+    {
+        Service.DeleteStudent(id);
+        sc = Service.displaydata();
+
+    }
+}
