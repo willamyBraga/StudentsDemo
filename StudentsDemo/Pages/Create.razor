@@ -11,17 +11,17 @@
         <div>
             <label>Nome</label>
             <br />
-            <input type="text" class="input-group" @bind-value="sc.nome" />
+            <input type="text" class="input-group form-control" @bind-value="sc.nome" />
         </div>
         <div>
             <label>Email</label>
             <br />
-            <input type="text" class="input-group" @bind-value="sc.email" />
+            <input type="text" class="input-group form-control" @bind-value="sc.email" />
         </div>
     </div>
     <div class="card-footer">
         <div class="d-flex">
-            <button @onclick="@(() => AddFormulario())">Cadastrar</button>
+            <button class="brn btn-success" @onclick="@(() => AddFormulario())">Cadastrar</button>
         </div>
     </div>
 </div>
